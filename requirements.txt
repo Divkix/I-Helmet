@@ -1,0 +1,13 @@
+datetime
+termcolor
+pyfiglet
+colorama
+imutils
+maxminddb
+numpy
+opencv-python
+pyttsx3
+pywin32
+requests
+SpeechRecognition
+sounddevice

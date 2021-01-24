@@ -1,0 +1,54 @@
+{
+    "Realtime Detection": {
+        "commands": [
+            "start detection",
+            "start realtime detection",
+            "real time detection",
+            "detetcion",
+            "start real time detection",
+            "real-time detection",
+            "detection"
+        ],
+        "help_text": "Say Start detection to start detecing the objects around you by using the camera."
+    },
+    "Find": {
+        "commands": [
+            "find"
+        ],
+        "help_text": "Say Find followed by the name of the object you would like to find."
+    },
+    "Navigation": {
+        "commands": [
+            "navigate to"
+        ],
+        "help_text": "Say navigate to followed by destination, then Google Maps will open."
+    },
+    "Status Check": {
+        "commands": [
+            "show status",
+            "status",
+            "show system status",
+            "status check",
+            "system check"
+        ],
+        "help_text": "Say status to check the system information."
+    },
+    "Time": {
+        "commands": [
+            "what is the time now",
+            "time now",
+            "time",
+            "what is the time"
+        ],
+        "help_text": "Say time or time now to get the current time."
+    },
+    "Shutdown": {
+        "commands": [
+            "turn off",
+            "shutdown",
+            "exit",
+            "shut down"
+        ],
+        "help_text": "Say shutdown or exit to turn off the assistant."
+    }
+}
