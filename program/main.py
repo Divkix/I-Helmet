@@ -1,22 +1,22 @@
 # Import necessary modules
-from datetime import datetime
-import speech_recognition as sr
-import time
 import os
-import webbrowser
+import sys
+import time
 
 # For catching error!
 import traceback
-import sys
+import webbrowser
+from datetime import datetime
+
+import speech_recognition as sr
+from funcs.beep import beep
+from funcs.ctext import ctext
+from funcs.initialize import initialize
+from funcs.log import logerr, loginfo
 
 # Import Realtime detection
-from funcs.realtimedetection import realtime_detection, objectdetection
-from funcs.beep import beep
-from funcs.initialize import initialize
-from funcs.ctext import ctext
+from funcs.realtimedetection import objectdetection, realtime_detection
 from funcs.voice import speak, speak_err
-from funcs.log import loginfo, logerr
-
 
 # Variables
 wakeup = start_nav = start_help = False
@@ -49,7 +49,7 @@ def start_I_Helmet():
             audio = r.listen(mic, timeout=5)  # Listen for 5 seconds"""
 
         try:
-            #stt = r.recognize_google(audio)
+            # stt = r.recognize_google(audio)
             command_spoken = input("Enter Command: ")  # stt.lower()
             loginfo(f"User: {command_spoken}")
 
@@ -87,7 +87,8 @@ def start_I_Helmet():
                             speak(f"Searching for {object_find}")
                             found = False
                             found, deg, direction = objectdetection(
-                                object_find, CLASSES_Mobile_DNN
+                                object_find,
+                                CLASSES_Mobile_DNN,
                             )
                             if found == True:
                                 speak("Object found!")
@@ -138,7 +139,7 @@ def start_I_Helmet():
                     command_spoken.split(" ")[0] == "help"
                 ):
                     speak(
-                        f"The following modules are loaded: {list(commands_help.keys())}. Speak help followed by module name to know more about an specific module."
+                        f"The following modules are loaded: {list(commands_help.keys())}. Speak help followed by module name to know more about an specific module.",
                     )
                 elif len(command_spoken.split(" ")) >= 2:
                     help_statement = command_spoken.split(" ", 1)[1]

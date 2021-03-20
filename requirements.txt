@@ -1,13 +1,13 @@
-datetime
-termcolor
-pyfiglet
 colorama
+datetime
 imutils
 maxminddb
 numpy
 opencv-python
+pyfiglet
 pyttsx3
 pywin32
 requests
-SpeechRecognition
 sounddevice
+SpeechRecognition
+termcolor

@@ -1,15 +1,17 @@
-import sounddevice as sd
-import requests
-import speech_recognition as sr
 import time
 
-# Local modules
-from .log import start_logging, logerr, loginfo
-from .ctext import ctext
+import requests
+import sounddevice as sd
+import speech_recognition as sr
+
 from .clear import clear
+from .ctext import ctext
+from .loadcmds import load_all_cmd_stuff
+
+# Local modules
+from .log import logerr, loginfo, start_logging
 from .pingloc import ping_location
 from .voice import speak, speak_err
-from .loadcmds import load_all_cmd_stuff
 
 
 def start_system_dialog():
@@ -27,7 +29,7 @@ def initialize():
         loginfo("Loading Audio Devices...")
         for index, name in enumerate(sr.Microphone.list_microphone_names()):
             loginfo(
-                f'Microphone with name "{index}" found for `Microphone(device_index={name})`'
+                f'Microphone with name "{index}" found for `Microphone(device_index={name})`',
             )
         loginfo(sd.query_devices())
         loginfo("Loaded Devices!")

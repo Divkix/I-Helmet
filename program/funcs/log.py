@@ -1,6 +1,6 @@
+import logging
 import os
 from datetime import datetime
-import logging
 
 # Define LOGGER as None, so value can be defined later
 LOGGER = None
@@ -18,7 +18,8 @@ def start_logging():
 
     log_file = f"{updir}/logs/{dt_string}.log"  # logs folder in main directory
     logging.basicConfig(
-        filename=log_file, level=logging.DEBUG
+        filename=log_file,
+        level=logging.DEBUG,
     )  # Save Log file to logs folder | Level: DEBUG
     LOGGER = logging.getLogger(__name__)
 

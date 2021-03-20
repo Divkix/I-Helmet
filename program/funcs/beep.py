@@ -1,5 +1,6 @@
 import winsound
 
+
 # Define Beep to make sound
 def beep(duration=500):
     # Set Duration To 500 ms == 0.5 second

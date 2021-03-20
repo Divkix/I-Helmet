@@ -17,7 +17,7 @@ or download zip from [Here](https://github.com/Divkix/I-Helmet/archive/master.zi
 
 ```sh
 virtualenv venv
-venv\Scripts\activate 
+venv\Scripts\activate
 ```
 
 ### Install Requirements:

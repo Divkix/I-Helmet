@@ -1,5 +1,6 @@
 import os
 
+
 # Clear output in console
 def clear():
     if os.name == "nt":

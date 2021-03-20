@@ -1,5 +1,6 @@
 import pyttsx3
-from .log import loginfo, logerr
+
+from .log import logerr, loginfo
 
 # Pyttsx config for voice feedback
 engine = pyttsx3.init()

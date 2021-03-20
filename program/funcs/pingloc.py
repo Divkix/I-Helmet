@@ -1,5 +1,7 @@
 import requests
+
 from .log import logerr, loginfo
+
 
 # Update location every 1 minute
 def ping_location(Start_ip):
@@ -15,6 +17,6 @@ def ping_location(Start_ip):
     Lat_loc = geo_data["latitude"]
     Long_loc = geo_data["longitude"]
     loginfo(
-        f"Current Location:\n\tLatitude - {Lat_loc}\n\tLongitude - {Long_loc}\n"
+        f"Current Location:\n\tLatitude - {Lat_loc}\n\tLongitude - {Long_loc}\n",
     )  # Print Location - Latitude and Longitude
     return my_ip, Lat_loc, Long_loc

@@ -1,5 +1,6 @@
-import os
 import json
+import os
+
 from .log import logerr, loginfo
 
 # Get Exact location of the commands.json file
@@ -12,7 +13,7 @@ for i in flst:
 cmDir += "commands.json"
 
 # Load data from commands.json file
-with open(cmDir, "r") as f:
+with open(cmDir) as f:
     dict_data = json.loads(f.read())
 
 

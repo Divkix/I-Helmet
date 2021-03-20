@@ -1,22 +1,23 @@
-from .log import logerr, loginfo
-from .voice import speak, speak_err
+import math
+import os
+import threading
+import time
+import urllib.parse
+import webbrowser
+import winsound
+
+import cv2
+import imutils
+import numpy as np
+import pyttsx3
+import requests
 
 # Import necessary modules
 import speech_recognition as sr
-import numpy as np
-import time
-import cv2
-import os
-import imutils
-import pyttsx3
-import math
-import winsound
-import threading
-from imutils.video import VideoStream
-from imutils.video import FPS
-import requests
-import urllib.parse
-import webbrowser
+from imutils.video import FPS, VideoStream
+
+from .log import logerr, loginfo
+from .voice import speak, speak_err
 
 start_detection = False
 
@@ -44,7 +45,12 @@ def realtime_detection(
                 scale = 1 / 255.0
 
                 blob = cv2.dnn.blobFromImage(
-                    frame, scale, (416, 416), (0, 0, 0), swapRB=True, crop=False
+                    frame,
+                    scale,
+                    (416, 416),
+                    (0, 0, 0),
+                    swapRB=True,
+                    crop=False,
                 )
 
                 net.setInput(blob)
@@ -77,7 +83,10 @@ def realtime_detection(
                             centers.append((centerX, centerY))
 
                 indices = cv2.dnn.NMSBoxes(
-                    boxes, confidences, conf_threshold, nms_threshold
+                    boxes,
+                    confidences,
+                    conf_threshold,
+                    nms_threshold,
                 )
                 texts = []
 
@@ -147,12 +156,15 @@ def objectdetection(objname, CLASSES_Mobile_DNN):
     confidence_value = 0.3  # Confidence Level to recognize the object
 
     COLORS = np.random.uniform(
-        0, 255, size=(len(CLASSES_Mobile_DNN), 3)
+        0,
+        255,
+        size=(len(CLASSES_Mobile_DNN), 3),
     )  # Load Colors for each class
 
     loginfo("Loading model...")
     net = cv2.dnn.readNetFromCaffe(
-        prototxt_file, model_file
+        prototxt_file,
+        model_file,
     )  # Load the DNN Model from Caffe files
     loginfo("Model information obtained!")
 
@@ -168,11 +180,15 @@ def objectdetection(objname, CLASSES_Mobile_DNN):
     while True:
         frame = webcam.read()  # Read from Webcam
         frame = imutils.resize(
-            frame, width=frame_width
+            frame,
+            width=frame_width,
         )  # Resize image read from webcam frame by frame
         (h, w) = frame.shape[:2]
         blob = cv2.dnn.blobFromImage(
-            cv2.resize(frame, (300, 300)), 0.007843, (300, 300), 127.5
+            cv2.resize(frame, (300, 300)),
+            0.007843,
+            (300, 300),
+            127.5,
         )
         net.setInput(blob)
         detections = net.forward()  # Start detections
@@ -215,7 +231,7 @@ def objectdetection(objname, CLASSES_Mobile_DNN):
                     elif centerX < user_x:
                         dir = -1
                     deg = math.degrees(
-                        math.atan(abs(centerX - user_x) / abs(centerY - user_y))
+                        math.atan(abs(centerX - user_x) / abs(centerY - user_y)),
                     )
 
         cv2.imshow("Camera", frame)  # Don't open Frame Window to show live detections!
@@ -242,7 +258,17 @@ def get_output_layers(net):
 
 # Draw Boxes on objects to identify them
 def draw_prediction(
-    img, class_id, confidence, x, y, x_plus_w, y_plus_h, frame_height, frame_width, fps, classes
+    img,
+    class_id,
+    confidence,
+    x,
+    y,
+    x_plus_w,
+    y_plus_h,
+    frame_height,
+    frame_width,
+    fps,
+    classes,
 ):
     COLORS = np.random.uniform(0, 255, size=(len(classes), 3))
     color_exitkey = (0, 0, 255)  # Red
@@ -252,8 +278,8 @@ def draw_prediction(
     color = COLORS[class_id]
     cv2.rectangle(img, (x, y), (x_plus_w, y_plus_h), color, 2)
     cv2.putText(img, label, (x - 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-    exit_text_h = round(((5 / 100) * frame_height))
-    exit_text_w = round(((5 / 100) * frame_width))
+    exit_text_h = round((5 / 100) * frame_height)
+    exit_text_w = round((5 / 100) * frame_width)
     cv2.putText(
         img,
         "Press q to exit",
