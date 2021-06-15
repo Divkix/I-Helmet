@@ -206,7 +206,7 @@ def objectdetection(objname, CLASSES_Mobile_DNN):
 
                     label = f"{CLASSES_Mobile_DNN[idx]}: {confidence * 100:.2f}%"
                     cv2.rectangle(frame, (startX, startY), (endX, endY), COLORS[idx], 2)
-                    y = startY - 15 if startY - 15 > 15 else startY + 15
+                    y = startY - 15 if startY > 30 else startY + 15
                     cv2.putText(
                         frame,
                         label,
@@ -252,8 +252,7 @@ def objectdetection(objname, CLASSES_Mobile_DNN):
 
 def get_output_layers(net):
     layer_names = net.getLayerNames()
-    output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
-    return output_layers
+    return [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 
 
 # Draw Boxes on objects to identify them
