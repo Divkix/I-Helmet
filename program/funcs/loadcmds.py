@@ -7,9 +7,7 @@ from .log import logerr, loginfo
 curr_dir = os.getcwd()
 flst = curr_dir.split("\\")
 
-cmDir = ""
-for i in flst:
-    cmDir += i + "/"
+cmDir = "".join(i + "/" for i in flst)
 cmDir += "commands.json"
 
 # Load data from commands.json file
@@ -27,9 +25,7 @@ def load_all_cmd_stuff():
 def load_commands():
     commands = {}
     for cmd in list(dict_data.keys()):
-        lst = []
-        for item in dict_data[cmd]["commands"]:
-            lst.append(item.lower())
+        lst = [item.lower() for item in dict_data[cmd]["commands"]]
         commands[cmd] = lst
         del lst
     loginfo("Loaded commands list!")

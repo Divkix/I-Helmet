@@ -79,7 +79,7 @@ def start_I_Helmet():
             elif command_spoken.split(" ", 1)[0] in (command_list["Find"][0]):
                 count = 0
                 wakeup = True
-                while count < 5 and wakeup == True:
+                while count < 5 and wakeup:
                     beep(1000)
                     try:
                         object_find = command_spoken.split(" ", 1)[1]
